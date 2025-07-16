@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>BreakBuddy</title>
+
+    <link rel="stylesheet" href="styles.css">
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <header>
+
+            <h1>BreakBuddy</h1>
+
+            <p class="subtitle">Your friendly reminder to take healthy breaks!</p>
+
+        </header>
+
+ 
+
+        <div class="timer-section">
+
+            <div class="timer-display">
+
+                <div class="timer-circle">
+
+                    <div class="timer-text">
+
+                        <span id="timer-minutes">45</span>:<span id="timer-seconds">00</span>
+
+                    </div>
+
+                    <div class="timer-label" id="timer-label">Work Time</div>
+
+                </div>
+
+            </div>
+
+           
+
+            <div class="timer-controls">
+
+                <button id="start-btn" class="btn btn-primary">Start Focus Mode</button>
+
+                <button id="stop-btn" class="btn btn-secondary" disabled>Quit Focus Mode</button>
+
+            </div>
+
+        </div>
+
+ 
+
+        <div class="status-section">
+
+            <div class="status-indicator">
+
+                <div class="status-dot" id="status-dot"></div>
+
+                <span id="status-text">Ready to start Focus Mode!</span>
+
+            </div>
+
+            <div class="reminder-count" id="reminder-count"></div>
+
+        </div>
+
+ 
+
+        <div class="settings-section">
+
+            <h3>⚙️ Your Settings</h3>
+
+            <div class="setting-group">
+
+                <label for="work-time">Work Time (minutes):</label>
+
+                <input type="number" id="work-time" min="1" max="120" value="45">
+
+            </div>
+
+            <div class="setting-group">
+
+                <label for="rest-time">Break Time (minutes):</label>
+
+                <input type="number" id="rest-time" min="1" max="30" value="5">
+
+            </div>
+
+            <button id="save-settings" class="btn btn-outline">Save Settings</button>
+
+        </div>
+
+ 
+
+        <div class="info-section">
+
+            <h3>How BreakBuddy Works</h3>
+
+            <ul>
+
+                <li>Set your work and break intervals</li>
+
+                <li>Start working and let BreakBuddy watch out for you</li>
+
+                <li>When work time ends, you'll get a friendly reminder</li>
+
+                <li>You can snooze the reminder twice if you're in the zone</li>
+
+                <li>After the third reminder, BreakBuddy will gently force you to rest</li>
+
+            </ul>
+
+        </div>
+
+ 
+
+        <footer>
+
+            <p>Press <kbd>Ctrl+Shift+B</kbd> to show BreakBuddy anytime!</p>
+
+        </footer>
+
+    </div>
+
+ 
+
+    <script src="renderer.js"></script>
+
+</body>
+
+</html>

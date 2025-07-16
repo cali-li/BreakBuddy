@@ -1,0 +1,447 @@
+* {
+
+    margin: 0;
+
+    padding: 0;
+
+    box-sizing: border-box;
+
+}
+
+ 
+
+body {
+
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+
+    background: transparent;
+
+    overflow: hidden;
+
+    /* Ensure highest z-index */
+
+    z-index: 999999;
+
+}
+
+ 
+
+.reminder-container {
+
+    width: 100vw;
+
+    height: 100vh;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: rgba(0, 0, 0, 0.4); /* Slightly darker backdrop for full-screen */
+
+    backdrop-filter: blur(15px); /* Enhanced blur for full-screen */
+
+    position: fixed;
+
+    top: 0;
+
+    left: 0;
+
+    right: 0;
+
+    bottom: 0;
+
+    z-index: 999999;
+
+}
+
+ 
+
+/* Add a subtle animated background */
+
+.reminder-container::before {
+
+    content: '';
+
+    position: absolute;
+
+    top: 0;
+
+    left: 0;
+
+    right: 0;
+
+    bottom: 0;
+
+    background: linear-gradient(45deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+
+    animation: backgroundShift 10s ease-in-out infinite;
+
+    z-index: -1;
+
+}
+
+ 
+
+@keyframes backgroundShift {
+
+    0%, 100% { opacity: 0.3; }
+
+    50% { opacity: 0.6; }
+
+}
+
+ 
+
+.reminder-content {
+
+    background: white;
+
+    border-radius: 20px; /* Doubled from 20px */
+
+    padding: 40px; /* Doubled from 40px */
+
+    text-align: center;
+
+    max-width: 400px; /* Doubled from 400px */
+
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3); /* Doubled from 20px 60px */
+
+    animation: slideIn 0.5s ease-out;
+
+    position: relative;
+
+    overflow: hidden;
+
+    backdrop-filter: blur(10px);
+
+    border: 1px solid rgba(255, 255, 255, 0.2);
+
+}
+
+ 
+
+.reminder-content::before {
+
+    content: '';
+
+    position: absolute;
+
+    top: 0;
+
+    left: 0;
+
+    right: 0;
+
+    height: 4px; /* Doubled from 4px */
+
+    background: linear-gradient(90deg, #667eea, #764ba2);
+
+}
+
+ 
+
+@keyframes slideIn {
+
+    from {
+
+        opacity: 0;
+
+        transform: translateY(-50px) scale(0.9); /* Doubled from -50px */
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: translateY(0) scale(1);
+
+    }
+
+}
+
+ 
+
+.reminder-icon {
+
+    font-size: 60px; /* Doubled from 60px */
+
+    margin-bottom: 20px; /* Doubled from 20px */
+
+    animation: pulse 2s infinite;
+
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.2));
+
+}
+
+ 
+
+@keyframes pulse {
+
+    0% { transform: scale(1); }
+
+    50% { transform: scale(1.1); }
+
+    100% { transform: scale(1); }
+
+}
+
+ 
+
+h1 {
+
+    color: #2c3e50;
+
+    font-size: 28px; /* Doubled from 28px */
+
+    font-weight: 700;
+
+    margin-bottom: 15px; /* Doubled from 15px */
+
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+}
+
+ 
+
+.reminder-message {
+
+    color: #555;
+
+    font-size: 16px; /* Doubled from 16px */
+
+    line-height: 1.6;
+
+    margin-bottom: 30px; /* Doubled from 30px */
+
+    max-width: 600px;
+
+    margin-left: auto;
+
+    margin-right: auto;
+
+}
+
+ 
+
+.reminder-actions {
+
+    display: flex;
+
+    gap: 15px; /* Doubled from 15px */
+
+    justify-content: center;
+
+    margin-bottom: 25px; /* Doubled from 25px */
+
+}
+
+ 
+
+.btn {
+
+    padding: 12px 24px; /* Doubled from 12px 24px */
+
+    border: none;
+
+    border-radius: 8px; /* Doubled from 8px */
+
+    font-size: 14px; /* Doubled from 14px */
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: all 0.3s ease;
+
+    min-width: 120px; /* Doubled from 120px */
+
+    position: relative;
+
+    overflow: hidden;
+
+}
+
+ 
+
+.btn::before {
+
+    content: '';
+
+    position: absolute;
+
+    top: 0;
+
+    left: -100%;
+
+    width: 100%;
+
+    height: 100%;
+
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+
+    transition: left 0.5s;
+
+}
+
+ 
+
+.btn:hover::before {
+
+    left: 100%;
+
+}
+
+ 
+
+.btn-primary {
+
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+
+    color: white;
+
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+
+}
+
+ 
+
+.btn-primary:hover {
+
+    transform: translateY(-2px); /* Doubled from -2px */
+
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+
+}
+
+ 
+
+.btn-secondary {
+
+    background: #ecf0f1;
+
+    color: #2c3e50;
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+
+}
+
+ 
+
+.btn-secondary:hover {
+
+    background: #d5dbdb;
+
+    transform: translateY(-2px); /* Doubled from -2px */
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+
+}
+
+ 
+
+.reminder-info {
+
+    background: rgba(102, 126, 234, 0.1);
+
+    padding: 15px; /* Doubled from 15px */
+
+    border-radius: 10px; /* Doubled from 10px */
+
+    margin-top: 20px; /* Doubled from 20px */
+
+    border: 1px solid rgba(102, 126, 234, 0.2);
+
+}
+
+ 
+
+.reminder-info p {
+
+    font-size: 14px; /* Doubled from 14px */
+
+    color: #555;
+
+    margin-bottom: 5px; /* Doubled from 5px */
+
+}
+
+ 
+
+.reminder-info p:last-child {
+
+    margin-bottom: 0;
+
+}
+
+ 
+
+.warning {
+
+    color: #e74c3c !important;
+
+    font-weight: 600;
+
+}
+
+ 
+
+#reminder-number {
+
+    font-weight: 700;
+
+    color: #667eea;
+
+}
+
+ 
+
+/* Responsive design */
+
+@media (max-width: 480px) { /* Doubled from 480px */
+
+    .reminder-content {
+
+        margin: 20px; /* Doubled from 20px */
+
+        padding: 30px 20px; /* Doubled from 30px 20px */
+
+        max-width: 90vw;
+
+    }
+
+   
+
+    h1 {
+
+        font-size: 24px; /* Adjusted for smaller screens */
+
+    }
+
+   
+
+    .reminder-message {
+
+        font-size: 14px; /* Adjusted for smaller screens */
+
+    }
+
+   
+
+    .reminder-actions {
+
+        flex-direction: column;
+
+    }
+
+   
+
+    .btn {
+
+        width: 100%;
+
+    }
+
+}

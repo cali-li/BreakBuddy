@@ -1,0 +1,107 @@
+{
+
+    "name": "break-buddy",
+  
+    "version": "1.0.0",
+  
+    "description": "Your friendly reminder to take healthy breaks and stay productive!",
+  
+    "main": "src/main.js",
+  
+    "scripts": {
+  
+      "start": "electron .",
+  
+      "dev": "electron . --dev",
+  
+      "test": "electron test-quick.js",
+  
+      "demo": "electron demo.js",
+  
+      "build": "electron-builder",
+  
+      "dist": "electron-builder --publish=never"
+  
+    },
+  
+    "keywords": [
+  
+      "break",
+  
+      "reminder",
+  
+      "productivity",
+  
+      "health",
+  
+      "wellness",
+  
+      "buddy"
+  
+    ],
+  
+    "author": "Your Name",
+  
+    "license": "MIT",
+  
+    "devDependencies": {
+  
+      "electron": "^28.0.0",
+  
+      "electron-builder": "^24.13.3"
+  
+    },
+  
+    "dependencies": {
+  
+      "electron-store": "^8.1.0",
+  
+      "play-sound": "^1.1.6"
+  
+    },
+  
+    "build": {
+  
+      "appId": "com.breakbuddy.app",
+  
+      "productName": "BreakBuddy",
+  
+      "directories": {
+  
+        "output": "dist"
+  
+      },
+  
+      "files": [
+  
+        "src/**/*",
+  
+        "assets/**/*"
+  
+      ],
+  
+      "win": {
+  
+        "target": "portable",
+  
+        "sign": false
+  
+      },
+  
+      "mac": {
+  
+        "target": "dmg",
+  
+        "sign": false
+  
+      },
+  
+      "linux": {
+  
+        "target": "AppImage"
+  
+      }
+  
+    }
+  
+  }
