@@ -172,7 +172,11 @@ function createMainWindow() {
 
     maximizable: false,
 
-    alwaysOnTop: false
+    alwaysOnTop: false,
+
+    
+
+    icon: path.join(__dirname, 'icon.png')
 
   });
 

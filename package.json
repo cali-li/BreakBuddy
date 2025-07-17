@@ -1,107 +1,163 @@
 {
 
-    "name": "break-buddy",
-  
-    "version": "1.0.0",
-  
-    "description": "Your friendly reminder to take healthy breaks and stay productive!",
-  
-    "main": "src/main.js",
-  
-    "scripts": {
-  
-      "start": "electron .",
-  
-      "dev": "electron . --dev",
-  
-      "test": "electron test-quick.js",
-  
-      "demo": "electron demo.js",
-  
-      "build": "electron-builder",
-  
-      "dist": "electron-builder --publish=never"
-  
+  "name": "break-buddy",
+
+  "version": "1.0.0",
+
+  "description": "Your friendly reminder to take healthy breaks and stay productive!",
+
+  "main": "src/main.js",
+
+  "scripts": {
+
+    "start": "electron .",
+
+    "dev": "electron . --dev",
+
+    "test": "electron test-quick.js",
+
+    "demo": "electron demo.js",
+
+    "build": "electron-builder",
+
+    "dist": "electron-builder --publish=never"
+
+  },
+
+  "keywords": [
+
+    "break",
+
+    "reminder",
+
+    "productivity",
+
+    "health",
+
+    "wellness",
+
+    "buddy"
+
+  ],
+
+  "author": "Your Name",
+
+  "license": "MIT",
+
+  "devDependencies": {
+
+    "electron": "^28.0.0",
+
+    "electron-builder": "^24.13.3"
+
+  },
+
+  "dependencies": {
+
+    "electron-store": "^8.1.0",
+
+    "play-sound": "^1.1.6"
+
+  },
+
+  "build": {
+
+    "appId": "com.breakbuddy.app",
+
+    "productName": "BreakBuddy",
+
+    "directories": {
+
+      "output": "dist"
+
     },
-  
-    "keywords": [
-  
-      "break",
-  
-      "reminder",
-  
-      "productivity",
-  
-      "health",
-  
-      "wellness",
-  
-      "buddy"
-  
+
+    "files": [
+
+      "src/**/*",
+
+      "clock_chime/**/*",
+
+      "assets/**/*",
+
+      "package.json"
+
     ],
-  
-    "author": "Your Name",
-  
-    "license": "MIT",
-  
-    "devDependencies": {
-  
-      "electron": "^28.0.0",
-  
-      "electron-builder": "^24.13.3"
-  
-    },
-  
-    "dependencies": {
-  
-      "electron-store": "^8.1.0",
-  
-      "play-sound": "^1.1.6"
-  
-    },
-  
-    "build": {
-  
-      "appId": "com.breakbuddy.app",
-  
-      "productName": "BreakBuddy",
-  
-      "directories": {
-  
-        "output": "dist"
-  
-      },
-  
-      "files": [
-  
-        "src/**/*",
-  
-        "assets/**/*"
-  
-      ],
-  
-      "win": {
-  
-        "target": "portable",
-  
-        "sign": false
-  
-      },
-  
-      "mac": {
-  
-        "target": "dmg",
-  
-        "sign": false
-  
-      },
-  
-      "linux": {
-  
-        "target": "AppImage"
-  
+
+    "extraResources": [
+
+      {
+
+        "from": "clock_chime",
+
+        "to": "clock_chime"
+
       }
-  
+
+    ],
+
+    "win": {
+
+      "target": [
+
+        {
+
+          "target": "portable",
+
+          "arch": ["x64"]
+
+        },
+
+        {
+
+          "target": "nsis",
+
+          "arch": ["x64"]
+
+        }
+
+      ],
+
+      "icon": "assets/icon.png"
+
+    },
+
+    "mac": {
+
+      "target": [
+
+        {
+
+          "target": "dmg",
+
+          "arch": ["x64", "arm64"]
+
+        }
+
+      ],
+
+      "icon": "assets/icon.png"
+
+    },
+
+    "linux": {
+
+      "target": [
+
+        {
+
+          "target": "AppImage",
+
+          "arch": ["x64"]
+
+        }
+
+      ],
+
+      "icon": "assets/icon.png"
+
     }
-  
+
   }
+
+}

@@ -1,32 +1,83 @@
-# BreakBuddy - Break Time Reminder App
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![project_license][license-shield]][license-url]
+[![LinkedIn][linkedin-shield]][linkedin-url]
 
- 
+ <br />
+<div align="center">
+  <a href="https://github.com/cali-li/BreakBuddy">
+    <img src="assets/icon.png" alt="Logo" width="200" height="200">
+  </a>
+
+<h3 align="center">BreakBuddy - Break Time Reminder App</h3>
+
+  <p align="center">
+    project_description
+    <br />
+    <a href="https://github.com/cali-li/BreakBuddy/doc_readme.md"><strong>Explore the docs »</strong></a>
+    <br />
+    <br />
+    <a href="https://github.com/cali-li/BreakBuddy/doc_readme.md">View Demo</a>
+    &middot;
+    <a href="https://github.com/cali-li/BreakBuddy/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
+    &middot;
+    <a href="https://github.com/cali-li/BreakBuddy/issues/new?labels=enhancement&template=feature-request---.md">Request Feature</a>
+  </p>
+
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+    <li><a href="#how-it-works">How It Works</a></li>
+    <li><a href="#file-structure">File Structure</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#license">License</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#acknowledgments">Acknowledgments</a></li>
+  </ol>
+</details>
+
+
+## About The Project
+[![Product Name Screen Shot][product-screenshot]](https://github.com/cali-li/BreakBuddy/doc/screenshot.png)
 
 A friendly Electron app that reminds you to take healthy breaks during your work sessions.
 
- 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## Features
 
- 
+### Built With
 
-- ⏰ **Customizable Work/Rest Intervals**: Set your preferred work and break durations
+* [![Electron][Electron.js]][Electron.url]
+* [![Node][Node.js]][Node.url]
+* [![HTML/CSS/JS][HTML/CSS/JavaScript]][html.url]
+* [![electronstore][electronstore]][electronstore.url]
+* [![playsound1][playsound]][playsound.url]
+* [![electronbuilder1][electronbuilder]][electronbuild.url]
 
-- 🔔 **Smart Reminders**: Get gentle reminders when work time ends
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-- 🛡️ **Screen Protector**: Forces you to rest after ignoring reminders
 
-- 🎵 **Custom Sound Notifications**: Play your own MP3 files for work/rest alerts
+## Getting Started
 
-- ⌨️ **Global Shortcuts**: Press Ctrl+Shift+B to show the app anytime
-
-- 💾 **Settings Persistence**: Your preferences are saved automatically
-
- 
-
-## Quick Start
-
- 
+Instructions on setting up the project locally.
+To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
 
@@ -34,13 +85,14 @@ A friendly Electron app that reminds you to take healthy breaks during your work
 
 - npm (comes with Node.js)
 
- 
-
 ### Installation
 
- 
+1. **Clone the repo**
+   ```sh
+   git clone https://github.com/cali-li/BreakBuddy.git
+   ```
 
-1. **Install Dependencies**:
+2. **Install Dependencies**:
 
    ```bash
 
@@ -49,19 +101,6 @@ A friendly Electron app that reminds you to take healthy breaks during your work
    ```
 
  
-
-2. **Add Sound Files** (Optional):
-
-   - Create a `clock_chime` folder in the root directory
-
-   - Add your MP3 files:
-
-     - `work_time_is_up.mp3` - Plays when work time ends
-
-     - `rest_time_is_up.mp3` - Plays when rest time ends
-
- 
-
 3. **Run the App**:
 
    ```bash
@@ -76,19 +115,36 @@ A friendly Electron app that reminds you to take healthy breaks during your work
 
    npm run demo
 
-  
-
-   # Quick test (1 minute each)
-
-   npm test
 
    ```
 
  
+4. Change git remote url to avoid accidental pushes to base project
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+<!-- USAGE EXAMPLES -->
+## How It Works
+
+1. **Work Session**: Set your work duration and start the timer
+
+2. **First Reminder**: When work time ends, you get a friendly reminder
+
+3. **Second Reminder**: If you continue working, you get another reminder
+
+4. **Screen Protector**: After 2 reminders, BreakBuddy forces you to rest
+
+5. **Rest Session**: Take your break while the screen protector is active
+
+6. **Repeat**: After rest time, you're back to work!
+
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 
 ## File Structure
 
- 
 
 ```
 
@@ -132,158 +188,115 @@ break-buddy/
 
 ```
 
- 
 
-## How It Works
 
- 
+<!-- ROADMAP -->
+## Roadmap
+- [ ] Add logo
+- [ ] Fix the test-quick.js to enable a new set of test
+- [ ] Enable Spotify in app
+- [ ] Add focused time calculator
+    - [ ] Detect the actual working time. Reset the clock if the end user doesn't actively work.
 
-1. **Work Session**: Set your work duration and start the timer
+See the [open issues](https://github.com/cali-li/BreakBuddy/issues) for a full list of proposed features (and known issues).
 
-2. **First Reminder**: When work time ends, you get a friendly reminder
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-3. **Second Reminder**: If you continue working, you get another reminder
 
-4. **Screen Protector**: After 2 reminders, BreakBuddy forces you to rest
 
-5. **Rest Session**: Take your break while the screen protector is active
 
-6. **Repeat**: After rest time, you're back to work!
+<!-- CONTRIBUTING -->
+## Contributing
 
- 
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
-## Commands
+If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
+Don't forget to give the project a star! Thanks again!
 
- 
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-- `npm start` - Run the main app (45 min work, 5 min rest)
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-- `npm run demo` - Run demo mode (6 seconds each)
+### Top contributors:
 
-- `npm test` - Run quick test (1 minute each)
+<!-- <a href="https://github.com/github_username/repo_name/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=github_username/repo_name" alt="contrib.rocks image" />
+</a> -->
 
-- `npm run build` - Build the app for distribution
 
- 
-
-## Global Shortcuts
-
- 
-
-- `Ctrl+Shift+B` - Show/hide the main window
-
- 
-
-## Customization
-
- 
-
-### Sound Files
-
-- Place your MP3 files in the `clock_chime` folder
-
-- Name them exactly: `work_time_is_up.mp3` and `rest_time_is_up.mp3`
-
-- The app will play these sounds when timers complete
-
- 
-
-### Timer Settings
-
-- Work time: 1-120 minutes (default: 45)
-
-- Rest time: 1-30 minutes (default: 5)
-
-- Settings are saved automatically
-
- 
-
-## Troubleshooting
-
- 
-
-### Sound Not Working
-
-- Ensure MP3 files exist in `clock_chime` folder
-
-- Check file names are exactly as specified
-
-- App will fall back to console beep if files are missing
-
- 
-
-### App Not Starting
-
-- Make sure Node.js is installed (version 14+)
-
-- Run `npm install` to install dependencies
-
-- Check console for error messages
-
- 
-
-### Screen Protector Issues
-
-- The screen protector is designed to stay on top
-
-- It will automatically close when rest time is complete
-
-- If stuck, restart the app
-
- 
-
-## Development
-
- 
-
-### Adding Features
-
-- Main logic is in `src/main.js`
-
-- UI is in `src/index.html` and `src/renderer.js`
-
-- Reminder system is in `src/reminder.js`
-
-- Screen protector is in `src/screen-protector.js`
-
- 
-
-### Building for Distribution
-
-```bash
-
-npm run build
-
-```
-
- 
-
-This creates distributable packages for Windows, macOS, and Linux.
-
- 
-
+<!-- LICENSE -->
 ## License
 
- 
+Distributed under the project_license. See `LICENSE.txt` for more information.
 
-MIT License - Feel free to modify and distribute!
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
- 
 
-## Support
 
- 
+<!-- CONTACT -->
+## Contact
 
-If you encounter issues:
+Cali Li - [@github_handle](https://github.com/cali-li) 
 
-1. Check the console for error messages
+Project Link: [https://github.com/cali-li/BreakBuddy](https://github.com/cali-li/BreakBuddy)
 
-2. Ensure all dependencies are installed
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-3. Verify sound files are in the correct location
 
-4. Try running in demo mode first
 
- 
+<!-- ACKNOWLEDGMENTS -->
+## Acknowledgments
 
-Enjoy your healthy work breaks! 🎉
+* []()
+* []()
+* []()
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[contributors-shield]: https://img.shields.io/github/contributors/cali-li/BreakBuddy.svg?style=for-the-badge
+[contributors-url]: https://github.com/cali-li/BreakBuddy/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/cali-li/BreakBuddy.svg?style=for-the-badge
+[forks-url]: https://github.com/cali-li/BreakBuddy/network/members
+[stars-shield]: https://img.shields.io/github/stars/cali-li/BreakBuddy.svg?style=for-the-badge
+[stars-url]: https://github.com/cali-li/BreakBuddy/stargazers
+[issues-shield]: https://img.shields.io/github/issues/cali-li/BreakBuddy.svg?style=for-the-badge
+[issues-url]: https://github.com/cali-li/BreakBuddy/issues
+[license-shield]: https://img.shields.io/github/license/cali-li/BreakBuddy.svg?style=for-the-badge
+[license-url]: https://github.com/cali-li/BreakBuddy/blob/master/LICENSE.txt
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[linkedin-url]: https://linkedin.com/in/cali-li
+[product-screenshot]: doc/screenshot.png
+[Electron.js]: https://img.shields.io/badge/Electron.js-000000?style=for-the-badge&logo=electron&logoColor=#47848F
+[Electron.url]: https://www.electronjs.org/
+[Node.js]: https://img.shields.io/badge/Node.js-000000?style=for-the-badge&logo=nodedotjs&logoColor=#5FA04E
+[Node.url]: https://nodejs.org/
+[HTML/CSS/JavaScript]: https://img.shields.io/badge/HTML/CSS/JavaScript-000000?style=for-the-badge&logo=html5&logoColor=#E34F26
+[html.url]: https://developer.mozilla.org/
+[electronstore]: https://img.shields.io/badge/electronstore-000000?style=for-the-badge&logo=github&logoColor=#181717
+[electronstore.url]: https://github.com/sindresorhus/electron-store
+[playsound]: https://img.shields.io/badge/playsound-000000?style=for-the-badge&logo=github&logoColor=#181717
+[playsound.url]: https://github.com/shime/play-sound
+[electronbuilder]: https://img.shields.io/badge/electronbuilder-000000?style=for-the-badge&logo=electronbuilder&logoColor=##000000
+[electronbuild.url]: https://www.electron.build/
+
+[React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
+[React-url]: https://reactjs.org/
+[Vue.js]: https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D
+[Vue-url]: https://vuejs.org/
+[Angular.io]: https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white
+[Angular-url]: https://angular.io/
+[Svelte.dev]: https://img.shields.io/badge/Svelte-4A4A55?style=for-the-badge&logo=svelte&logoColor=FF3E00
+[Svelte-url]: https://svelte.dev/
+[Laravel.com]: https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white
+[Laravel-url]: https://laravel.com
+[Bootstrap.com]: https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white
+[Bootstrap-url]: https://getbootstrap.com
+[JQuery.com]: https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white
+[JQuery-url]: https://jquery.com 
