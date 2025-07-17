@@ -1,3 +1,4 @@
+<a id="readme-top"></a>
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
@@ -16,10 +17,10 @@
   <p align="center">
     project_description
     <br />
-    <a href="https://github.com/cali-li/BreakBuddy/doc_readme.md"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/cali-li/BreakBuddy/blob/master/doc/doc_readme.md"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/cali-li/BreakBuddy/doc_readme.md">View Demo</a>
+    <a href="https://github.com/cali-li/BreakBuddy/blob/master/doc/doc_readme.md">View Demo</a>
     &middot;
     <a href="https://github.com/cali-li/BreakBuddy/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
     &middot;
