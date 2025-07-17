@@ -25,7 +25,7 @@
     &middot;
     <a href="https://github.com/cali-li/BreakBuddy/issues/new?labels=enhancement&template=feature-request---.md">Request Feature</a>
   </p>
-
+</div>
 <!-- TABLE OF CONTENTS -->
 <details>
   <summary>Table of Contents</summary>
