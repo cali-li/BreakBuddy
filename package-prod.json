@@ -1,0 +1,24 @@
+{
+    "name": "break-buddy",
+    "version": "1.0.2",
+    "description": "Your friendly reminder to take healthy breaks and stay productive!",
+    "main": "src/main.js",
+    "scripts": {
+        "start": "electron ."
+    },
+    "keywords": [
+        "break",
+        "reminder",
+        "productivity",
+        "health",
+        "wellness",
+        "buddy"
+    ],
+    "author": "Cali Li",
+    "license": "MIT",
+    "dependencies": {
+        "electron": "^28.0.0",
+        "electron-store": "^8.1.0",
+        "play-sound": "^1.1.6"
+    }
+}

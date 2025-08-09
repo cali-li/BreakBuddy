@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain, screen, globalShortcut, dialog } = require('electron');
+const { app, BrowserWindow, ipcMain, screen, globalShortcut, dialog, Tray, Menu } = require('electron');
 
 const path = require('path');
 
@@ -17,6 +17,7 @@ let mainWindow;
 let reminderWindow;
 
 let screenProtectorWindows = []; // Array to hold multiple screen protector windows
+let tray = null; //system tray
 
 let timerInterval;
 
@@ -148,7 +149,153 @@ function saveSettings() {
 
 }
 
- 
+ // create system tray
+ function createTray() {
+  const iconPath = path.join(__dirname,'icon.png');
+  tray = new Tray(iconPath);
+
+  const contextMenu = Menu.buildFromTemplate([
+    {
+      label: 'Show BreakBuddy',
+      click: () => {
+        if (mainWindow) {
+          mainWindow.show();
+          mainWindow.focus();
+        } else {
+          createMainWindow();
+        }
+      }
+    },
+    {
+      lebel: 'Timer Status',
+      enabled: false
+    },
+    {
+      label: isWorking ? 'Working': 'Resting',
+      enabled: false
+    },
+    {type: 'separator'},
+    {
+      label: 'Start Timer',
+      click: () => {
+        if (mainWindow && mainWindow.webContents) {
+          mainWindow.webContents.send('start-timer-from-tray');
+        }
+      }
+    },
+    {
+      label: 'Stop Timer',
+      click: () => {
+        if (mainWindow && mainWindow.webContents) {
+          mainWindow.webContents.send('stop-timer-from-tray');
+        }
+      }
+    },
+    {type: 'separator'},
+    {
+      label: 'Quit BreakBuddy',
+      click: () => {
+        app.isQuiting = true;
+        app.quit();
+      }
+    }
+  ]);
+
+  tray.setContextMenu(contextMenu);
+  tray.setToolTip('BreakBuddy - Your friendly break reminder');
+
+  // double click to show window
+  tray.on('double-click', () => {
+    if (mainWindow) {
+      mainWindow.show();
+      mainWindow.focus();
+    } else {
+      createMainWindow();
+    }
+  });
+ }
+
+// update tray tooltip and menu basd on timer status
+function updateTray() {
+  if (!tray) return;
+  const status = isWorking ? 'Working': 'Resting';
+  tray.setToolTip(`BreakBuddy - ${status}`);
+
+  //recreate context menu with updated status
+  const contextMenu = Menu.buildFromTemplate([
+    {
+      label: 'Show BreakBuddy',
+      click: () => {
+        if (mainWindow) {
+          mainWindow.show();
+          mainWindow.focus();
+        } else {
+          createMainWindow();
+        }
+      }
+    },
+    {
+      label: 'Timer Status',
+      enabled: false
+    },
+    {
+      label: isWorking ? 'Working': 'Resting',
+      enabled: false
+    },
+    {type: 'separator'},
+    {
+      label: 'Start Timer',
+      enabled: !timerInterval,
+      click: () => {
+        if (mainWindow && mainWindow.webContents) {
+          mainWindow.webContents.send('stop-timer-from-tray');
+        }
+      }
+    },
+    {type: 'separator'},
+    {
+      label: 'Quit BreakBuddy',
+      click: () => {
+        app.isQuiting = true;
+        app.quit();
+      }
+    }
+  ]);
+  tray.setContextMenu(contextMenu);
+}
+
+//show main window when status changes and update always-on-top behavior
+function showMainWindowOnStatusChange() {
+  if (mainWindow) {
+    mainWindow.show();
+    mainWindow.focus();
+
+    //set always on top behavior based on current state
+    if (!isWorking) {
+      //during rest time, keep windows always on top and disable minimize only
+      mainWindow.setAlwaysOnTop(true, 'screen-saver', 1);
+      mainWindow.setMinimizable(false);
+      mainWindow.setClosable(true);
+    } else {
+      // during work time, normal window behavior
+      mainWindow.setAlwaysOnTop(false);
+      mainWindow.setMinimizable(true);
+      mainWindow.setClosable(true);
+    }
+
+    //force window to stay focused during rest
+    if (!isWorking) {
+      mainWindow.setVisibleOnAllWorkspaces(true);
+      mainWindow.focus();
+    } else {
+      mainWindow.setVisibleOnAllWorkspaces(false);
+    }
+  } else {
+    // create window if it doesnt exist
+    createMainWindow();
+  }
+}
+
 
 function createMainWindow() {
 
@@ -162,7 +309,8 @@ function createMainWindow() {
 
       nodeIntegration: true,
 
-      contextIsolation: false
+      contextIsolation: false,
+      backgroundThrottling: false // prevent throttling when minimized
 
     },
 
@@ -187,6 +335,48 @@ function createMainWindow() {
   // mainWindow.webContents.openDevTools(); // Open dev tools for testing
 
  
+  mainWindow.on('minimize', (event) => {
+    if (!isWorking) {
+      // prevent minimize during rest time
+      event.preventDefault();
+      mainWindow.show();
+      mainWindow.focus();
+      return false;
+    } else {
+      console.log('main window minimized - timer continues running');
+    }
+  });
+
+  mainWindow.on('hide', (event) => {
+    if (!isWorking) {
+      // prevent hiding during rest time
+      event.preventDefault();
+      mainWindow.show();
+      mainWindow.focus();
+      return false;
+    } else {
+      console.log('main window hidden - timer continues running');
+    }
+  });
+
+  mainWindow.on('close', (event) => {
+    // always quit when close button is clicked
+    app.isQuiting = true;
+    app.quit();
+  });
+
+  //prevent focus loss during rest time
+  mainWindow.on('blur', () => {
+    if (!isWorking) {
+      // during rest time, keep window focused
+      setTimeout(() => {
+        if (mainWindow && !mainWindow.isDestroyed()) {
+          mainWindow.focus();
+          mainWindow.setAlwaysOnTop(true, 'screen-saver', 1);
+        }
+      }, 100);
+    }
+  });
 
   mainWindow.on('closed', () => {
 
@@ -538,7 +728,7 @@ function startTimer() {
 
   const interval = isWorking ? settings.workTime * 60 * 1000 : settings.restTime * 60 * 1000;
 
- 
+  updateTray(); // update tray when timer starts
 
   timerInterval = setInterval(() => {
 
@@ -645,6 +835,8 @@ function startTimer() {
      
 
       isWorking = true;
+      updateTray(); // update tray when switching to work mode
+      showMainWindowOnStatusChange(); //show window and remove always on top for work
 
       reminderCount = 0;
 
@@ -665,6 +857,7 @@ function stopTimer() {
     clearInterval(timerInterval);
 
     timerInterval = null;
+    updateTray(); // update tray when timer stops
 
   }
 
@@ -693,6 +886,8 @@ function startRestTimer() {
  
 
   isWorking = false;
+  updateTray(); //update tray when switching to rest mode
+  showMainWindowOnStatusChange(); //show window and set always to top for rest
 
   reminderCount = 0;
 
@@ -803,6 +998,8 @@ ipcMain.handle('start-timer', () => {
   stopTimer();
 
   isWorking = true;
+  updateTray(); // update tray whem timer starts
+  showMainWindowOnStatusChange(); //show window and set proper always on top behavior
 
   reminderCount = 0;
 
@@ -818,9 +1015,41 @@ ipcMain.handle('stop-timer', () => {
 
   stopTimer();
 
-  isWorking = false;
+  // close any active reminder windows
+  if (reminderWindow) {
+    reminderWindow.close();
+    reminderWindow = null;
+  }
+  // close all screen protectors
+  if (screenProtectorWindows && screenProtectorWindows.length > 0) {
+    screenProtectorWindows.forEach((window, index) => {
+      if (window && !window.isDestroyed()) {
+        try {
+          window.destroy();
+
+        } catch (error) {
+          console.log(`error closing screen protector ${index + 1}:`, error);
+        }
+      }
+    });
+    screenProtectorWindows = [];
+  }
+
+  // reset to work mode when stopping timer
+  isWorking = true;
 
   reminderCount = 0;
+
+  // restore normal window behavior
+  if (mainWindow) {
+    mainWindow.setAlwaysOnTop(false);
+    mainWindow.setMinimizable(true);
+    mainWindow.setClosable(true);
+    mainWindow.setVisibleOnAllWorkspaces(false);
+  }
+
+  //update tray to reflect stopped state
+  updateTray();
 
   return { isWorking, reminderCount };
 
@@ -933,6 +1162,8 @@ ipcMain.handle('close-screen-protector', () => {
   setTimeout(() => {
 
     isWorking = true;
+    updateTray(); // update tray when timer starts
+    showMainWindowOnStatusChange();
 
     reminderCount = 0; // Ensure reminder count is 0 for fresh start
 
@@ -953,6 +1184,7 @@ app.whenReady().then(() => {
   loadSettings();
 
   createMainWindow();
+  createTray(); // create system tray
 
  
 
@@ -969,19 +1201,57 @@ app.whenReady().then(() => {
     }
 
   });
+  // emergency quit shortcut
+  globalShortcut.register('CommandOrControl+Shift+Q', () => {
+    app.isQuiting = true;
+    app.quit();
+  });
+  // block alt+tab and other system shortcuts during rest time
+  globalShortcut.register('Alt+Tab', () => {
+    if (!isWorking) {
+      if (mainWindow) {
+        mainWindow.focus();
+      }
+      return;
+    }
 
+    // during work time, let the system handle alt+tab normally
+    globalShortcut.unregister('Alt+Tab');
+    setTimeout(() => {
+      if (!globalShortcut.isRegistered('Alt+Tab')) {
+        globalShortcut.register('Alt+Tab', () => {
+          if (!isWorking) {
+            console.log('Alt+Tab blocked during rest time');
+            if (mainWindow) {
+              mainWindow.focus();
+            }
+            return;
+          }
+        });
+      }
+    }, 100);
+  });
+
+  //block windows key during rest time
+  globalShortcut.register('Super', () => {
+    if (!isWorking) {
+      if (mainWindow) {
+        mainWindow.focus();
+      }
+      return;
+    }
+  });
 });
 
  
 
 app.on('window-all-closed', () => {
 
-  if (process.platform !== 'darwin') {
-
-    app.quit();
-
+  if (app.isQuiting) {
+    if (process.platform !== 'darwin') {
+      app.quit();
+    }
   }
-
 });
 
  
@@ -992,11 +1262,15 @@ app.on('activate', () => {
 
     createMainWindow();
 
+  } else if (mainWindow) {
+    mainWindow.show();
   }
 
 });
 
- 
+app.on('before-quit', () => {
+  app.isQuiting = true;
+});
 
 app.on('will-quit', () => {
 

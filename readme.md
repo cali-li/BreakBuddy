@@ -60,6 +60,10 @@
 
 A friendly Electron app that reminds you to take healthy breaks during your work sessions.
 
+**Update:**
+
+- v1.0.2: fixed the issue with minimize the app. force the window to be on top of the screen during resting phase.
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
